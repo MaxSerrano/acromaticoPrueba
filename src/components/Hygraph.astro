@@ -1,0 +1,40 @@
+---
+interface Post {
+  title: string;
+}
+
+const query = {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    query: `
+      {
+        blogPosts {
+          title
+        }
+      }`,
+  }),
+};
+
+const response = await fetch(import.meta.env.HYGRAPH_ENDPOINT, query);
+const json = await response.json();
+const posts: Post[] = json.data.blogPosts;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title></title>
+  </head>
+  <body>
+    {
+      posts.map((post) => (
+        <div>
+          <h2>{post.title}</h2>
+        </div>
+      ))
+    }
+  </body>
+</html>

@@ -1,0 +1,50 @@
+---
+interface Props {
+	title: string;
+	ref: string;
+    des: string;
+	
+}
+
+const { ref, title, des} = Astro.props;
+---
+<div class="divdown">
+<li class="down">
+	<a href={ref} download={des}>{title}</a>
+	
+</li>
+</div>
+<style>
+	.down {
+        text-align: center;
+		list-style: none;
+		display: flex;
+		padding: 1px;
+		background-color: #d519cc;
+		background-image: none;
+		background-size: 400%;
+		border-radius: 7px;
+		background-position: 10%;
+		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+	}
+	.down > a {
+		width: 100%;
+		text-decoration: none;
+		line-height: 1.4;
+		padding: calc(0.2rem - 0.5px);
+		border-radius: 4px;
+		color: white;
+		background-color: #7e20e1e6;
+		opacity: 0.8;
+	}
+	
+	.down:is(:hover, :focus-within) {
+		background-position: 0;
+		background-image: var(--accent-gradient);
+	}
+	.down:is(:hover, :focus-within) h2 {
+		color: rgb(var(--accent-light));
+	}
+
+</style>
